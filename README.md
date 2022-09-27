@@ -1,2 +1,2 @@
 # tileserver-gl
-Tileserver-gl hosted in nginx to allow for SSL
+Tileserver-gl hosted in nginx to provide for SSL availability
