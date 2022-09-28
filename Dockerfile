@@ -67,9 +67,9 @@ EXPOSE 8080
 
 # USER node:node
 
-CMD [ "/app/docker-entrypoint.sh" ]
+# CMD [ "/app/docker-entrypoint.sh" ]
 
-# ENTRYPOINT ["/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
 
 # FROM nginx:mainline
