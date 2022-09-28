@@ -62,9 +62,9 @@ ENV CHOKIDAR_INTERVAL=500
 
 EXPOSE 80
 
+# USER node:node
 
 CMD [ "/app/docker-entrypoint.sh" ]
-# USER node:node
 
 # ENTRYPOINT ["/app/docker-entrypoint.sh"]
 
