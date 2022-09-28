@@ -51,7 +51,6 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-# RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY --from=builder /usr/src/app /app
 COPY run.sh /app
@@ -65,8 +64,8 @@ ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=500
 
 EXPOSE 80
+EXPOSE 8080
 
 # USER node:node
 
-#CMD ["/app/docker-entrypoint.sh"]
 ENTRYPOINT [ "/app/run.sh" ]
