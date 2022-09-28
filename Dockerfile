@@ -22,8 +22,8 @@ ENV NODE_ENV="production"
 
 RUN cd /usr/src/app && npm install --production
 
-RUN wget https://github.com/maptiler/tileserver-gl/releases/download/v1.3.0/test_data.zip
-RUN unzip test_data.zip -d /usr/src/app/data
+# RUN wget https://github.com/maptiler/tileserver-gl/releases/download/v1.3.0/test_data.zip
+# RUN unzip test_data.zip -d /usr/src/app/data
 
 FROM node:16-bullseye-slim AS final
 
@@ -57,15 +57,12 @@ COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
 VOLUME /data
-COPY --from=builder /usr/src/app/data /data
+# COPY --from=builder /usr/src/app/data /data
 
 ENV NODE_ENV="production"
 ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=500
 
 EXPOSE 80
-EXPOSE 8080
-
-# USER node:node
 
 ENTRYPOINT [ "/app/run.sh" ]
