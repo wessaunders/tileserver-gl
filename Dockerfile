@@ -40,6 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     libuv1-dev \
     libc6-dev \
     libcap2-bin \
+    nginx \
     && apt-get -y --purge autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -48,6 +49,9 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-t
 RUN apt install ./libjpeg-turbo8_2.0.3-0ubuntu1_amd64.deb
 RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb --output libicu66_66.1-2ubuntu2_amd64.deb
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
+
+# RUN apt-get install nginx -y
+#COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /usr/src/app /app
 
