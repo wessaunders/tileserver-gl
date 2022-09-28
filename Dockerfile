@@ -53,28 +53,20 @@ RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=builder /usr/src/app /app
+COPY run.sh /app
+RUN chmod a+x /app/run.sh
 
 VOLUME /data
-WORKDIR /data
-COPY --from=builder /usr/src/app/data .
+# WORKDIR /data
+COPY --from=builder /usr/src/app/data /data
 
 ENV NODE_ENV="production"
 ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=500
 
-
-EXPOSE 8080
+EXPOSE 80
 
 # USER node:node
 
-# CMD [ "/app/docker-entrypoint.sh" ]
-
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-
-
-# FROM nginx:mainline
-# COPY --from=final /app /usr/share/nginx
-# COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-
-# CMD ["nginx", "-g", "daemon off;"]
+#CMD ["/app/docker-entrypoint.sh"]
+ENTRYPOINT [ "/app/run.sh" ]
