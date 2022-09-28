@@ -51,13 +51,13 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY --from=builder /usr/src/app /app
 COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
 VOLUME /data
-# WORKDIR /data
 COPY --from=builder /usr/src/app/data /data
 
 ENV NODE_ENV="production"
