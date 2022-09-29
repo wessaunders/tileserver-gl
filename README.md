@@ -3,12 +3,11 @@ Tileserver-gl hosted in nginx to be able to provide for SSL availability.
 
 ### Installing
 docker run -d -p 80:80 --name-*name* --restart=always -v *pathToData*:/data *pathToSslCertificates*:/certificates tileserver-gl
-#### Installation details
-*name* indicates the name of the container.  This is dependent on the install and can be anything.
 
-*pathToData* indicates the location on the server that contains the tileserver data and configuration.
-
-*pathToSslCertificates* indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
+* Installation details
+  * *name* indicates the name of the container.  This is dependent on the install and can be anything.
+  * *pathToData* indicates the location on the server that contains the tileserver data and configuration.
+  * *pathToSslCertificates* indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
 
 ### Tileserver data and configuration
   * Data structure
