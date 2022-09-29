@@ -12,7 +12,7 @@ docker run -d -p 80:80 --name-*name* --restart=always -v *pathToData*:/data *pat
 
 ### Tileserver data and configuration
 #### Data structure
-Tileserver data should be provided in a specific folder structure.
+Tileserver data should be provided in a specific folder structure.  MBTiles files should be stored in the MBTiles folder for each enviroment.  Style files, such as mapbox styles, should be stored in the Styles folder for each environment.
 
 ##### Create a folder for all the data for the map.  Then create a folder for each environment.  Each environment folder should contain an MBTiles folder and a Styles folder.
 
@@ -47,32 +47,37 @@ For example, if the root data folder on the server was named MapData and an envi
       "maxSize": 2048,
       "pbfAlias": "pbf",
       "serveAllFonts": false,
-      "serveAllStyles": false,
+      "serveAllStyles": true,
       "serveStaticMaps": true,
       "tileMargin": 0
     },
     "styles": {
-      "basic": {
-        "style": "basic.json",
-        "tilejson": {
-          "type": "overlay",
-          "bounds": [8.44806, 47.32023, 8.67537, 47.43468]
-        }
-      },
-      "hybrid": {
-        "style": "satellite-hybrid.json",
-        "serve_rendered": false,
-        "tilejson": {
-          "format": "webp"
-        }
-      {
+     <styles>
     },
     "data": {
       <data>
     }
   }
   ```
-* <data> should be set up in the following manner
+* \<styles\> should be set up in the following manner:
+  * For each style available to the client, a section defining that style and where to find it needs to be defined.
+  * The styles files are stored in the Styles subdirectory.  Each style should be named the same as the style section.
+  * For example, if a client has styles called Day and Night, the Styles folder should contain style files named Day.json and Night.json, and the styles section would be defined as follows:
+  ```
+  "styles": {
+    "Day": {
+      "style": "Day.json",
+      "serve_rendered": true,
+      "serve_data": true
+    },
+    "Night": {
+      "style": "Night.json",
+      "serve_rendered": true,
+      "serve_data": true
+    }
+  }
+  ```
+* \<data\> should be set up in the following manner:
   * For each layer that will be available to the client, a section defining that layer and where to find the mbtiles file needs to be defined
   * The mbtiles files are stored in the MBTiles subdirectory associated with each environment, such as /MapData/Test/MBTiles for an environment named Test
   * If a client has a layer called Streets, it would be defined as follows:
