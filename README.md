@@ -1,6 +1,9 @@
 # tileserver-gl
 Tileserver-gl hosted in nginx to be able to provide for SSL availability.  
 
+### Pull from repository
+docker pull ghcr.io/wessaunders/tileserver-gl:latest
+
 ### Installing
 docker run -d -p 80:80 --name-*name* --restart=always -v *pathToData*:/data *pathToSslCertificates*:/certificates tileserver-gl
 
