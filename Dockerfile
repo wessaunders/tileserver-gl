@@ -67,3 +67,6 @@ ENV CHOKIDAR_INTERVAL=500
 EXPOSE 80
 
 ENTRYPOINT [ "/app/run.sh" ]
+
+LABEL org.opencontainers.image.source=https://github.com/wessaunders/tileserver-gl
+LABEL org.opencontainser.image.description="Tileserver-gl hosted in nginx to be able to provide for SSL availability"
