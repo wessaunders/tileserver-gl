@@ -58,6 +58,6 @@ WORKDIR /data
 
 EXPOSE 80
 
-# USER node:node
+USER node:node
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
