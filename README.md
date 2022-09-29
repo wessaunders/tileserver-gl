@@ -112,7 +112,7 @@ docker run -d -p 80:80 --name-*name* --restart=always -v *pathToData*:/data *pat
   ```
   
 ## Code
-Tileserver-gl is developed and maintained at [[maptiler/tileserver-gl](https://github.com/maptiler/tileserver-gl)](https://github.com/maptiler/tileserver-gl).  
+Tileserver-gl is developed and maintained at [https://github.com/maptiler/tileserver-gl](https://github.com/maptiler/tileserver-gl).  
   
 ## Documentation
 Full documentation for tileserver-gl is available at [https://tileserver.readthedocs.io/](https://tileserver.readthedocs.io/). 
