@@ -11,16 +11,22 @@ docker run -d -p 80:80 --name-*name* --restart=always -v *pathToData*:/data *pat
 *pathToSslCertificates* indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
 
 ### Tileserver data and configuration
-#### Data structure
-Tileserver data should be provided in a specific folder structure.  MBTiles files should be stored in the MBTiles folder for each enviroment.  Style files, such as mapbox styles, should be stored in the Styles folder for each environment.
+  * Data structure
+    * Tileserver data should be provided in a specific folder structure.  
+      * Fonts needed for the styles should be stored in the Fonts folder
+      * MBTiles files should be stored in the MBTiles folder for each enviroment
+      * Sprites needed for the styles should be stored in the Sprites folder 
+      * Style files, such as mapbox styles, should be stored in the Styles folder for each environment
 
-##### Create a folder for all the data for the map.  Then create a folder for each environment.  Each environment folder should contain an MBTiles folder and a Styles folder.
+##### Create a folder for all the data for the map.  Then create a folder for each environment.  Each environment folder should contain a Fonts, MBTiles Sprites, and a Styles folder.
 
-For example, if the root data folder on the server was named MapData and an enviroment named Test was being set up, the resulting folder structure would look like this:
-* MapData
-  * Test
-    * MBTiles
-    * Styles
+  * For example, if the root data folder on the server was named MapData and an enviroment named Test was being set up, the resulting folder structure would look like this:
+    * MapData
+      * Test
+        * Fonts
+        * MBTiles
+        * Sprites
+        * Styles
 
 #### Configuration
 * Create a file called config.json.  This will the configuration for a specific environment, so save it in the appropriate environment folder.  You will need a separate config.json file for each environment.
@@ -30,8 +36,8 @@ For example, if the root data folder on the server was named MapData and an envi
     "options": {
       "paths": {
         "root": "",
-        "fonts: "",
-        "sprites": "",
+        "fonts: "Fonts",
+        "sprites": "Sprites",
         "styles": "Styles",
         "mbtiles": "MBTiles"
       },
