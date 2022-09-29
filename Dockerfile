@@ -56,6 +56,7 @@ COPY --from=builder /usr/src/app /app
 COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
+VOLUME /certificates
 VOLUME /data
 # COPY --from=builder /usr/src/app/data /data
 
