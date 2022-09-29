@@ -51,6 +51,8 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/ssl.conf /etc/nginx/ssl.conf
+COPY nginx/selfsignedsslcerts.conf /etc/nginx/ssl.conf
 
 COPY --from=builder /usr/src/app /app
 COPY run.sh /app
@@ -65,8 +67,9 @@ ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=500
 
 EXPOSE 80
+EXPOSE 443
 
 ENTRYPOINT [ "/app/run.sh" ]
 
 LABEL org.opencontainers.image.source=https://github.com/wessaunders/tileserver-gl
-LABEL org.opencontainser.image.description="Tileserver-gl hosted in nginx to be able to provide for SSL availability"
+LABEL org.opencontainers.image.description="Tileserver-gl hosted in nginx to be able to provide for SSL availability"
