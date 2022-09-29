@@ -41,6 +41,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     libc6-dev \
     libcap2-bin \
     nginx \
+    ssl-cert \
     && apt-get -y --purge autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -51,6 +52,8 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN make-ssl-cert generate-default-snakeoil --force-overwrite
 
 COPY --from=builder /usr/src/app /app
 COPY nginx/ssl.conf /app/ssl.conf
