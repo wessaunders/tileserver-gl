@@ -51,10 +51,10 @@ RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY nginx/ssl.conf /etc/nginx/ssl.conf
-COPY nginx/selfsignedsslcerts.conf /etc/nginx/ssl.conf
 
 COPY --from=builder /usr/src/app /app
+COPY nginx/ssl.conf /app/ssl.conf
+COPY nginx/selfsignedsslcerts.conf /app/selfsignedsslcerts.conf
 COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
