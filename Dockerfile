@@ -51,17 +51,19 @@ RUN apt install ./libjpeg-turbo8_2.0.3-0ubuntu1_amd64.deb
 RUN curl http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb --output libicu66_66.1-2ubuntu2_amd64.deb
 RUN apt install ./libicu66_66.1-2ubuntu2_amd64.deb
 
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+RUN unlink /etc/nginx/sites-enabled/default
+COPY nginx/nginx.conf /etc/nginx/sites-available/tileserver.conf
+RUN ln -s /etc/nginx/sites-available/tileserver.conf /etc/nginx/sites-enabled/tileserver.conf
 
-RUN make-ssl-cert generate-default-snakeoil --force-overwrite
+#RUN make-ssl-cert generate-default-snakeoil --force-overwrite
 
 COPY --from=builder /usr/src/app /app
-COPY nginx/ssl.conf /app/ssl.conf
-COPY nginx/selfsignedsslcerts.conf /app/selfsignedsslcerts.conf
+#COPY nginx/ssl.conf /app/ssl.conf
+#COPY nginx/selfsignedsslcerts.conf /app/selfsignedsslcerts.conf
 COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
-VOLUME /certificates
+#VOLUME /certificates
 VOLUME /data
 # WORKDIR /data
 # COPY --from=builder /usr/src/app/data /data
@@ -70,10 +72,10 @@ ENV NODE_ENV="production"
 ENV CHOKIDAR_USEPOLLING=1
 ENV CHOKIDAR_INTERVAL=500
 
-EXPOSE 80
-EXPOSE 443
-
-ENTRYPOINT [ "/app/run.sh" ]
-
 LABEL org.opencontainers.image.source=https://github.com/wessaunders/tileserver-gl
 LABEL org.opencontainers.image.description="Tileserver-gl hosted in nginx to be able to provide for SSL availability"
+
+EXPOSE 80
+#EXPOSE 443
+
+ENTRYPOINT [ "/app/run.sh" ]
