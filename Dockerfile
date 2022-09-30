@@ -55,15 +55,15 @@ RUN unlink /etc/nginx/sites-enabled/default
 COPY nginx/nginx.conf /etc/nginx/sites-available/tileserver.conf
 RUN ln -s /etc/nginx/sites-available/tileserver.conf /etc/nginx/sites-enabled/tileserver.conf
 
-#RUN make-ssl-cert generate-default-snakeoil --force-overwrite
+RUN make-ssl-cert generate-default-snakeoil --force-overwrite
 
 COPY --from=builder /usr/src/app /app
-#COPY nginx/ssl.conf /app/ssl.conf
-#COPY nginx/selfsignedsslcerts.conf /app/selfsignedsslcerts.conf
+COPY nginx/ssl.conf /app/ssl.conf
+COPY nginx/selfsignedsslcerts.conf /app/selfsignedsslcerts.conf
 COPY run.sh /app
 RUN chmod a+x /app/run.sh
 
-#VOLUME /certificates
+VOLUME /certificates
 VOLUME /data
 # WORKDIR /data
 # COPY --from=builder /usr/src/app/data /data
@@ -76,6 +76,6 @@ LABEL org.opencontainers.image.source=https://github.com/wessaunders/tileserver-
 LABEL org.opencontainers.image.description="Tileserver-gl hosted in nginx to be able to provide for SSL availability"
 
 EXPOSE 80
-#EXPOSE 443
+EXPOSE 443
 
 ENTRYPOINT [ "/app/run.sh" ]
