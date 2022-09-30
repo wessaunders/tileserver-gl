@@ -63,6 +63,7 @@ RUN chmod a+x /app/run.sh
 
 VOLUME /certificates
 VOLUME /data
+WORKDIR /data
 # COPY --from=builder /usr/src/app/data /data
 
 ENV NODE_ENV="production"
