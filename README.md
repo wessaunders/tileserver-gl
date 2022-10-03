@@ -5,12 +5,14 @@ Tileserver-gl hosted in nginx to be able to provide for SSL availability.
 docker pull ghcr.io/wessaunders/tileserver-gl:latest
 
 ### Installing
-docker run -d -p 80:80 --name=*name* --restart=always -v *pathToData*:/data *pathToSslCertificates*:/certificates ghcr.io/wessaunders/tileserver-gl:latest
+docker run -d -p \<nonsecuredestinationport\>:80 -p \<securedestinationport\>:443 --name=\<name\> -v \<pathToData\>:/data \<pathToSslCertificates\>:/certificates ghcr.io/wessaunders/tileserver-gl:latest
 
 * Installation details
-  * *name* indicates the name of the container.  This is dependent on the install and can be anything.
-  * *pathToData* indicates the location on the server that contains the tileserver data and configuration.
-  * *pathToSslCertificates* indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
+  * \<nonsecuredestinationport\> indicates the non secure destination port to host the service on, such as 80.
+  * \<securedestinationport\> indicates the secure destination prot to host the service on.  This will typically be 443.
+  * \<name\> indicates the name of the container.  This is dependent on the install and can be anything.
+  * \<pathToData\> indicates the location on the server that contains the tileserver data and configuration.
+  * \<pathToSslCertificates\> indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
 
 ### Tileserver data and configuration
   * Data structure
