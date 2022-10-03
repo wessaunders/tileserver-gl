@@ -13,6 +13,13 @@ docker run -d -p \<nonsecuredestinationport\>:80 -p \<securedestinationport\>:44
   * \<name\> indicates the name of the container.  This is dependent on the install and can be anything.
   * \<pathToData\> indicates the location on the server that contains the tileserver data and configuration.
   * \<pathToSslCertificates\> indicates the location on the server that contains the ssl certificates (.pem files) that will be used by the container.
+  
+* SSL certificates
+  * The certificates folder needs to contain both the private key .pem file and the public key .pem file.
+  * If using letsencrypt:
+    * Both the public and private key files will typically be located in the /etc/letsencrypt/live/\<machine_dns_name>\ folder.
+    * The public key file will typically be called fullchain.pem.
+    * The private key file will typically be called privkey.pem.
 
 ### Tileserver data and configuration
   * Data structure
